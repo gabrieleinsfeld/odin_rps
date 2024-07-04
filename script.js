@@ -1,7 +1,19 @@
+
 let humanScore = 0
 let computerScore = 0
 
+const rock = document.getElementById('button1')
+const paper = document.getElementById('button2')
+const scissors = document.getElementById('button3')
+const result = document.getElementById('result')
+const score = document.getElementById('score')
+const humanScoreDiv = document.getElementById('humanScore')
+const computerScoreDiv = document.getElementById('computerScore')
 
+
+rock.addEventListener("click", () =>{playRound('Rock', getComputerChoice())})
+paper.addEventListener("click", () =>{playRound('Paper', getComputerChoice())})
+scissors.addEventListener("click", () =>{playRound('Scissors', getComputerChoice())})
 
 
 function getComputerChoice(){
@@ -27,47 +39,57 @@ function getHumanChoice(){
 
 
 function playRound(humanChoice, computerChoice){
-    console.log(`You picked ${humanChoice} and the computer picked ${computerChoice}`)
+    result.innerHTML =(`You picked ${humanChoice} and the computer picked ${computerChoice}` + '<br>')
     if (humanChoice == computerChoice){
-        console.log('It is a tie!')
+        result.innerHTML= result.innerHTML + ('It is a tie!')
     }else if(humanChoice == "Rock" && computerChoice == "Paper"){
-        console.log(`You lost, ${computerChoice} beats ${humanChoice}`)
+        result.innerHTML= result.innerHTML + (`You lost, ${computerChoice} beats ${humanChoice}`)
         computerScore += 1
     }else if(humanChoice == "Rock" && computerChoice == "Scissors"){
-        console.log(`You won!!${humanChoice} beats ${computerChoice}`)
+        result.innerHTML= result.innerHTML + (`You won!!${humanChoice} beats ${computerChoice}`)
         humanScore +=1
     }else if(humanChoice == "Paper" && computerChoice == "Scissors"){
-        console.log(`You lost, ${computerChoice} beats ${humanChoice}`)
+        result.innerHTML= result.innerHTML + (`You lost, ${computerChoice} beats ${humanChoice}`)
         computerScore += 1
     }else if(humanChoice == "Paper" && computerChoice == "Rock"){
-        console.log(`You won!!${humanChoice} beats ${computerChoice}`)
+        result.innerHTML= result.innerHTML + (`You won!!${humanChoice} beats ${computerChoice}`)
         humanScore +=1
     }else if(humanChoice == "Scissors" && computerChoice == "Rock"){
-        console.log(`You lost, ${computerChoice} beats ${humanChoice}`)
+        result.innerHTML= result.innerHTML + (`You lost, ${computerChoice} beats ${humanChoice}`)
         computerScore += 1
     }else if(humanChoice == "Scissors" && computerChoice == "Paper"){
-        console.log(`You won!!${humanChoice} beats ${computerChoice}`)
+        result.innerHTML= result.innerHTML + (`You won!!${humanChoice} beats ${computerChoice}`)
         humanScore +=1
     }else{
-        console.log('Something went wrong')
+        result.innerHTML= result.innerHTML + ('Something went wrong')
     }
+    updateScore(humanScore, computerScore)
     return
+    
+}
+
+function updateScore(humanScore, computerScore){
+    humanScoreDiv.textContent = `Your Score: ${humanScore}`
+    computerScoreDiv.textContent = `Your Score: ${computerScore}`
 }
 
 
-function playGame(){
-    for (let i = 0; i<5; i++){
-        playRound(getHumanChoice(), getComputerChoice())
-    }
-    if (computerScore == humanScore){
-        console.log(`It was a tie, the computer scored ${computerScore} points and you scored ${humanScore} points`)
-    }else if(humanScore > computerScore){
-        console.log(`You won!! The computer scored ${computerScore} points and you scored ${humanScore} points`)
-    }else if (humanScore < computerScore){
-        console.log(`You lost, the computer scored ${computerScore} points and you scored ${humanScore} points`)
-    }else{
-        console.log('Something went wrong')
-    }
-}
 
-playGame()
+
+
+
+// function playGame(){
+//     for (let i = 0; i<5; i++){
+//         playRound(getHumanChoice(), getComputerChoice())
+//     }
+//     if (computerScore == humanScore){
+//         console.log(`It was a tie, the computer scored ${computerScore} points and you scored ${humanScore} points`)
+//     }else if(humanScore > computerScore){
+//         console.log(`You won!! The computer scored ${computerScore} points and you scored ${humanScore} points`)
+//     }else if (humanScore < computerScore){
+//         console.log(`You lost, the computer scored ${computerScore} points and you scored ${humanScore} points`)
+//     }else{
+//         console.log('Something went wrong')
+//     }
+// }
+
